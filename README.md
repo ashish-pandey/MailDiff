@@ -1,4 +1,4 @@
-# MailDiff
+# MailDiff (to be uploaded soon...)
 Aotumatically mails your group members the local changes you make in your project
 
 #Installation
