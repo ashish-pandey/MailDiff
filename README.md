@@ -31,8 +31,8 @@ mail sent
 * git
 
 #Platform
-*Linux
+* Linux
 
 #Note:
 * The sender needs to have a valid account to send mails.
-* Make sure You call the script from the directory you want to monitor.
+* Make sure you call the script from the directory you want to monitor.
