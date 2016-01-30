@@ -1,5 +1,6 @@
 # MailDiff
-Aotumatically mails your group members the local changes you make in your project
+Aotumatically mails your group members the local changes you make in your project.
+* Basically mails the group members the uncommited changes.
 
 #Installation
 ```
@@ -25,3 +26,13 @@ mail sent
 sending mail to someone@gmail.com .......
 mail sent
 ```
+#Dependencies:
+* Python
+* git
+
+#Platform
+*Linux
+
+#Note:
+* The sender needs to have a valid account to send mails.
+* Make sure You call the script from the directory you want to monitor.
