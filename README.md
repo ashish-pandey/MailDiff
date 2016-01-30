@@ -1,4 +1,4 @@
-# MailDiff (to be uploaded soon...)
+# MailDiff
 Aotumatically mails your group members the local changes you make in your project
 
 #Installation
@@ -9,13 +9,15 @@ Aotumatically mails your group members the local changes you make in your projec
 
 #Usage:
 ```
->> cd your_directory_path
+>> cd your_project_directory
 >> mail_diff
 ```
 Then follow through the instructions
 
 #Examples:
 ```
+>> cd Documents/scripts
+>> mail_diff
 Enter your Password: 
 sending mail to apndey.15@gmail.com .......
 mail sent
