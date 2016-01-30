@@ -1,0 +1,8 @@
+setup.py
+bin/mail_diff
+mail_diff/__init__.py
+mail_diff.egg-info/PKG-INFO
+mail_diff.egg-info/SOURCES.txt
+mail_diff.egg-info/dependency_links.txt
+mail_diff.egg-info/not-zip-safe
+mail_diff.egg-info/top_level.txt

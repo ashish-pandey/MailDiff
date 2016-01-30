@@ -1,0 +1,77 @@
+#!/usr/bin/env python 
+import smtplib
+import getpass
+import commands
+import subprocess
+import os
+import sys
+
+ch = raw_input("Make sure you are in the directory which you want to monitor.. Continue(y/n)")
+if ch!='y':
+	exit(1)
+path = os.getcwd()
+os_env_dir = os.path.expanduser('~')
+str2=path.split('/')
+n=len(str2)
+dir_name = str2[n-1]
+print(path)
+if (os.path.isdir(path+"/.git/")==False):
+	 #it is not a git repo yet
+	 #make it a git repo
+	 print("Not a git repo yet")
+	 pr = subprocess.Popen( "/usr/bin/git init" , cwd = os.path.dirname(path+'/'), shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+	 (out, error) = pr.communicate()
+
+from_add = ""
+f_addresses = []
+file_path = os_env_dir+"/.maildiff/"+ dir_name
+
+if (os.path.isdir(file_path+"/")==False):
+	#create a new directory local
+	os.makedirs(file_path)
+	print("Using the script on this directory for the first time......")
+	from_add = raw_input("Enter your gmail username: ")
+	elist = raw_input("Enter the space separated list of your friends email addresses: ")
+	f_addresses = elist.split(' ')
+	#insert the data in a sqlite file
+	f = open(file_path +"/database.txt" , 'w')
+	s = from_add + "\n"
+	f.write(s)
+	for addr in f_addresses:
+		s = addr + "\n"
+		f.write(s)
+	f.close()
+
+else:
+	#get the email of the user and his friends
+	#read the database or file
+	i = 0
+	for line in open(file_path + "/database.txt"):
+		if i == 0:
+			from_add = line
+			i = 1
+		else:
+			f_addresses.append(line)
+
+
+print("Note: make sure you turn this on: https://www.google.com/settings/security/lesssecureapps")
+
+ser = smtplib.SMTP('smtp.gmail.com' , 587)
+ser.starttls()
+password = getpass.getpass("Enter your password: ")
+ser.login(from_add , password)
+
+#to_add = raw_input("Enter the recipent email address: ")
+pr = subprocess.Popen( "/usr/bin/git diff" , cwd = os.path.dirname( path + '/' ), shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+(msg, error) = pr.communicate()
+if error == '' and msg!='':
+	for to_add in f_addresses:
+		try:
+			print("Sending mail to: " + to_add)
+			ser.sendmail(from_add , to_add , msg)
+			print("Mail sent")
+		except Exception as e:
+			print("Could not send the mail")
+else:
+	print("Mail Not sent: Either there were no differences or there was some problem with git")
+ser.quit()
