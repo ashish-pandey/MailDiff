@@ -1,5 +1,5 @@
 # MailDiff
-Aotumatically mails your group members the local changes you make in your project.
+Automatically mails your group members the local changes you make in your project.
 * Basically mails the group members the uncommited changes.
 
 #Installation
